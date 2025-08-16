@@ -19,15 +19,15 @@ const useLoginMutation = () => {
         throw new Error("Lỗi khi đăng nhập");
       }
 
-      let data;
+      let responseData;
       try {
         const text = await res.text();
-        data = text ? JSON.parse(text) : null;
+        responseData = text ? JSON.parse(text) : null;
       } catch (error) {
         console.error("JSON parse error:", error);
         throw new Error("Lỗi khi parse response");
       }
-      return data;
+      return responseData;
     },
   });
 };

@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { proxyJson } from "@/lib/next-api-auth";
-import { emitOrderCreated } from "@/app/api/notifications/sse/route";
+import { emitOrderCreated } from "@/lib/sse-utils";
 
 export async function GET(request: NextRequest) {
   try {
