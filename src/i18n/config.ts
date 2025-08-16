@@ -11,11 +11,12 @@ export const defaultLocale: Locale = 'vi';
 // Cấu hình cho next-intl
 export default getRequestConfig(async ({ locale }) => {
   // Kiểm tra ngôn ngữ có được hỗ trợ không
-  if (!locales.includes(locale as Locale)) {
+  if (!locale || !locales.includes(locale as Locale)) {
     notFound();
   }
 
   return {
+    locale,
     messages: (await import(`./locales/${locale}.json`)).default
   };
 });
