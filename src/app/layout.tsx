@@ -3,7 +3,6 @@ import { Quicksand } from "next/font/google";
 import "./globals.css";
 import { NextFont } from "next/dist/compiled/@next/font";
 import AppProvider from "@/context/app-provider";
-import LayoutMain from "@/layouts/layout-main";
 import { Toaster } from "sonner";
 import { cookies } from "next/headers";
 import AppContext from "@/context/app-context";
@@ -33,9 +32,7 @@ export default async function RootLayout({
         <AppProvider>
           <AppContext initialSessionToken={sessionToken?.value as string}>
             <QueryProvider>
-              <CartProvider>
-                <LayoutMain>{children}</LayoutMain>
-              </CartProvider>
+              <CartProvider>{children}</CartProvider>
             </QueryProvider>
           </AppContext>
           <Toaster />

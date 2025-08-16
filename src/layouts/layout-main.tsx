@@ -7,7 +7,7 @@ import Footer from "./Footer";
 function LayoutMain({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   // check page admin
-  const isAdminPage = pathname.startsWith("/dashboard");
+  const isAdminPage = pathname.includes("/dashboard");
   return (
     <div>
       {!isAdminPage && <Header />}
