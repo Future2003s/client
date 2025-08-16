@@ -1,6 +1,5 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
 import { useState } from "react";
 import {
@@ -12,11 +11,16 @@ import {
 import { ChevronDown, Globe } from "lucide-react";
 
 export default function LanguageSwitcher() {
-  const t = useTranslations("common");
-  const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  
+  // Try to get locale from pathname or use default
+  const pathSegments = pathname.split("/");
+  const localeFromPath = pathSegments[1];
+  const currentLocale: Locale = locales.includes(localeFromPath as Locale) 
+    ? (localeFromPath as Locale) 
+    : "vi";
 
   const handleLanguageChange = (newLocale: string) => {
     const newPath = createLocalizedPathname(pathname, newLocale as Locale);
@@ -24,7 +28,7 @@ export default function LanguageSwitcher() {
     setIsOpen(false);
   };
 
-  const currentLanguage = getLocaleDisplayName(locale as Locale);
+  const currentLanguage = getLocaleDisplayName(currentLocale);
 
   return (
     <div className="relative">
@@ -49,7 +53,7 @@ export default function LanguageSwitcher() {
                 key={lang}
                 onClick={() => handleLanguageChange(lang)}
                 className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-100 ${
-                  locale === lang ? "bg-blue-50 text-blue-700" : "text-gray-700"
+                  currentLocale === lang ? "bg-blue-50 text-blue-700" : "text-gray-700"
                 }`}
               >
                 {getLocaleDisplayName(lang)}
