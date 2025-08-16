@@ -8,6 +8,7 @@ import { authApiRequest } from "@/apiRequests/auth";
 import accountApiRequest from "@/apiRequests/account";
 import { toast } from "sonner";
 import { useEffect, useRef, useState } from "react";
+import LanguageSwitcher from "@/components/language-switcher";
 
 const navLinks = [
   { href: "/", label: "Trang Chủ" },
@@ -21,6 +22,7 @@ const navLinks = [
     ],
   },
   { href: "/story", label: "Câu Chuyện" },
+  { href: "/demo", label: "Demo Đa Ngôn Ngữ" },
   {
     label: "Chức Năng",
     subItems: [
@@ -391,6 +393,7 @@ const Header = () => {
 
             {/* Icons & Mobile Menu Trigger */}
             <div className="flex items-center gap-3">
+              <LanguageSwitcher />
               {sessionToken ? (
                 <div className="relative">
                   <button
